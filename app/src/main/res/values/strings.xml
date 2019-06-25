@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">my_games_app</string>
+    <string name="app_name">Sm4sh</string>
+    <string name="key_user_preferences" translatable="false">user_preferences</string>
 </resources>
