@@ -39,4 +39,25 @@
         <item name="cornerRadius">24dp</item>
     </style>
 
+    <style name="AppTextTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="AppRangeSeekBar">
+        <item name="left_thumb_color">@color/colorAccent</item>
+        <item name="left_thumb_color_pressed">@color/colorAccent</item>
+        <item name="right_thumb_color">@color/colorAccent</item>
+        <item name="right_thumb_color_pressed">@color/colorAccent</item>
+    </style>
+
+    <style name="AppRatingBar" parent="android:Widget.Material.RatingBar.Indicator">
+        <item name="android:scaleX">.8</item>
+        <item name="android:scaleY">.8</item>
+        <item name="android:progressBackgroundTint">@android:color/transparent</item>
+        <item name="android:progressTint">#ffffcd00</item>
+        <item name="android:secondaryProgressTint">#ffffcd00</item>
+    </style>
+
 </resources>

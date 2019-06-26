@@ -10,14 +10,17 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.co.gamesapp.extension.startActivityForResult
 import com.co.gamesapp.R
 import com.co.gamesapp.allgames.adapter.GamesAdapter
 import com.co.gamesapp.allgames.adapter.GamesAdapterBuilder
 import com.co.gamesapp.allgames.adapter.BrandsAdapterBuilder
 import com.co.gamesapp.allgames.presenter.AllGamesPresenter
 import com.co.gamesapp.allgames.presenter.GamesListPresenter
+import com.co.gamesapp.data.FilterParameters
 import com.co.gamesapp.data.Game
 import com.co.gamesapp.extension.unsuscribeObserver
+import com.co.gamesapp.gamesfilter.FilterActivity
 import kotlinx.android.synthetic.main.activity_all_games.*
 
 class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
@@ -50,6 +53,7 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.filter -> {
+                startActivityForResult(FILTER_REQUEST_CODE, FilterActivity::class.java)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -59,7 +63,11 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             FILTER_REQUEST_CODE -> {
-
+                val filterParameters: FilterParameters? =
+                    data?.extras?.getParcelable(FilterActivity.FILTER_PARAMETERS_TAG)
+                if (filterParameters != null) {
+                    presenter?.filterGames(filterParameters)
+                }
             }
         }
     }
@@ -95,27 +103,6 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
         })
     }
 
-    override fun showPopularGames(games: LiveData<List<Game>>) {
-        unsuscribeObserver(games)
-        games.observe(this, Observer {
-            hideSwipeRefreshing()
-            text_popular.text = getString(R.string.text_popular, it.size)
-            popularGamesListPresenter = GamesListPresenter(it)
-            val popularGamesAdapter = createGamesAdapter(
-                GamesAdapter.LayoutType.POPULAR,
-                popularGamesListPresenter!!
-            ) { count ->
-                text_all.text = getString(R.string.text_all, count)
-            }
-            list_popular_games.apply {
-                setHasFixedSize(true)
-                adapter = popularGamesAdapter
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            }
-        })
-    }
-
-
     override fun showNewGames(games: LiveData<List<Game>>) {
         unsuscribeObserver(games)
         games.observe(this, Observer {
@@ -123,8 +110,8 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
             text_new.text = getString(R.string.text_new, it.size)
             newGamesListPresenter = GamesListPresenter(it)
             val newGamesAdapter = createGamesAdapter(
-                GamesAdapter.LayoutType.POPULAR,
-                popularGamesListPresenter!!
+                GamesAdapter.LayoutType.NEWS,
+                newGamesListPresenter!!
             ) { count ->
                 text_new.text = getString(R.string.text_new, count)
             }
@@ -137,6 +124,26 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
         })
     }
 
+    override fun showPopularGames(games: LiveData<List<Game>>) {
+        unsuscribeObserver(games)
+        games.observe(this, Observer {
+            hideSwipeRefreshing()
+            text_popular.text = getString(R.string.text_popular, it.size)
+            popularGamesListPresenter = GamesListPresenter(it)
+            val popularGamesAdapter = createGamesAdapter(
+                GamesAdapter.LayoutType.POPULAR,
+                popularGamesListPresenter!!
+            ) { count ->
+                text_popular.text = getString(R.string.text_popular, count)
+            }
+            list_popular_games.apply {
+                setHasFixedSize(true)
+                adapter = popularGamesAdapter
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            }
+        })
+    }
+
     override fun showAllGames(games: LiveData<List<Game>>) {
         unsuscribeObserver(games)
         games.observe(this, Observer {
@@ -144,8 +151,8 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
             text_all.text = getString(R.string.text_all, it.size)
             allGamesListPresenter = GamesListPresenter(it)
             val allGamesAdapter = createGamesAdapter(
-                GamesAdapter.LayoutType.POPULAR,
-                popularGamesListPresenter!!
+                GamesAdapter.LayoutType.ALL,
+                allGamesListPresenter!!
             ) { count ->
                 text_all.text = getString(R.string.text_all, count)
             }

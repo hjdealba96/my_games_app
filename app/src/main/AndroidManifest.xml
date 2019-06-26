@@ -25,6 +25,7 @@
 
         <activity android:name=".onboarding.OnBoardingActivity" />
         <activity android:name=".allgames.AllGamesActivity" />
+        <activity android:name=".gamesfilter.FilterActivity" />
 
     </application>
 

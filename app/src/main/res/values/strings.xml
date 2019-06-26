@@ -12,4 +12,13 @@
     <string name="text_new">New (%1$d)</string>
     <string name="text_popular">Popular (%1$d)</string>
     <string name="text_all">All (%1$d)</string>
+    <string name="text_sort">Sort by</string>
+    <string name="text_filters">Filters</string>
+    <string name="text_downloads">Downloads</string>
+    <string name="text_date_added">Date added</string>
+    <string name="text_price">Price</string>
+    <string name="text_prices_range">Prices range</string>
+    <string name="text_ratings">Ratings</string>
+    <string name="text_brands">Brands</string>
+    <string name="text_apply">Apply</string>
 </resources>
