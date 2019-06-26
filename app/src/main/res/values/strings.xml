@@ -6,4 +6,10 @@
     <string name="text_real_time_updates">Real-time updates</string>
     <string name="text_next">Next</string>
     <string name="text_get_started">Get started</string>
+    <string name="text_games">Games</string>
+    <string name="text_game_picture">Game picture</string>
+    <string name="text_filter">Filter</string>
+    <string name="text_new">New (%1$d)</string>
+    <string name="text_popular">Popular (%1$d)</string>
+    <string name="text_all">All (%1$d)</string>
 </resources>

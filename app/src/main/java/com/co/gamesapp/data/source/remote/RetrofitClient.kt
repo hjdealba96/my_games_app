@@ -30,7 +30,7 @@ object RetrofitClient {
         .writeTimeout(timeOut, TimeUnit.SECONDS)
         .addInterceptor {
             val request = it.request().newBuilder()
-                .addHeader("X-Parse-GamesApplication-Id", "I9pG8SLhTzFA0ImFkXsEvQfXMYyn0MgDBNg10Aps")
+                .addHeader("X-Parse-Application-Id", "I9pG8SLhTzFA0ImFkXsEvQfXMYyn0MgDBNg10Aps")
                 .addHeader("X-Parse-REST-API-Key", "Yvd2eK2LODfwVmkjQVNzFXwd3N0X7oUuwiMI3VDZ")
                 .build()
             return@addInterceptor it.proceed(request)
