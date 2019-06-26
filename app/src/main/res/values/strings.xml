@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Sm4sh</string>
     <string name="key_user_preferences" translatable="false">user_preferences</string>
+    <string name="text_catalog">Access our extended Catalog</string>
+    <string name="text_worth_gaming">Know the little is worth gaming</string>
+    <string name="text_real_time_updates">Real-time updates</string>
+    <string name="text_next">Next</string>
+    <string name="text_get_started">Get started</string>
 </resources>
