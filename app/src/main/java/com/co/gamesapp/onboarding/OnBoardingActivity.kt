@@ -9,9 +9,9 @@ import com.co.gamesapp.allgames.AllGamesActivity
 import com.co.gamesapp.extension.replaceFragment
 import com.co.gamesapp.extension.replaceFragmentBackStack
 import com.co.gamesapp.extension.startActivity
-import com.co.gamesapp.onboarding.fragment.StepFragment
+import com.co.gamesapp.onboarding.fragment.*
 
-class OnBoardingActivity : AppCompatActivity(), OnBoardingContract.View, StepFragment.IOnBoardingActions {
+class OnBoardingActivity : AppCompatActivity(), OnBoardingContract.View, OnBoardingActions {
 
     private var presenter: OnBoardingPresenter? = null
 
@@ -25,29 +25,29 @@ class OnBoardingActivity : AppCompatActivity(), OnBoardingContract.View, StepFra
     override fun onAttachFragment(fragment: Fragment?) {
         super.onAttachFragment(fragment)
         when (fragment) {
-            is StepFragment -> fragment.setOnBoardingActions(this)
+            is OnBoardingStepFragment -> fragment.setOnBoardingActions(this)
         }
     }
 
     override fun showFirstScreen() {
-        replaceFragment(R.id.fragment_container, StepFragment.newInstance(StepFragment.Step.FIRST_STEP))
+        replaceFragment(R.id.fragment_container, StepFragmentFactory.getStep(IStepFactory.StepType.FIRST))
     }
 
-    override fun onStepDone(step: StepFragment.Step) {
+    override fun onStepDone(step: IStepFactory.StepType) {
         when (step) {
-            StepFragment.Step.FIRST_STEP -> {
+            IStepFactory.StepType.FIRST -> {
                 replaceFragmentBackStack(
                     R.id.fragment_container,
-                    StepFragment.newInstance(StepFragment.Step.SECOND_STEP)
+                    StepFragmentFactory.getStep(IStepFactory.StepType.SECOND)
                 )
             }
-            StepFragment.Step.SECOND_STEP -> {
+            IStepFactory.StepType.SECOND -> {
                 replaceFragmentBackStack(
                     R.id.fragment_container,
-                    StepFragment.newInstance(StepFragment.Step.THIRD_STEP)
+                    StepFragmentFactory.getStep(IStepFactory.StepType.THIRD)
                 )
             }
-            StepFragment.Step.THIRD_STEP -> {
+            IStepFactory.StepType.THIRD -> {
                 presenter?.setStarted()
             }
         }
