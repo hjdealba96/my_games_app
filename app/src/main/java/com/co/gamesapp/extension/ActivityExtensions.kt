@@ -2,6 +2,7 @@ package com.co.gamesapp.extension
 
 import android.content.Intent
 import android.graphics.PorterDuff
+import android.os.Bundle
 import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,12 @@ import com.co.gamesapp.R
 
 fun <T : AppCompatActivity> AppCompatActivity.startActivity(activityClass: Class<T>) {
     val intent = Intent(this, activityClass)
+    startActivity(intent)
+}
+
+fun <T : AppCompatActivity> AppCompatActivity.startActivity(activityClass: Class<T>, extras: Bundle) {
+    val intent = Intent(this, activityClass)
+    intent.putExtras(extras)
     startActivity(intent)
 }
 

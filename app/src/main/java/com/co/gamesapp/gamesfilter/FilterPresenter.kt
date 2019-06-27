@@ -15,6 +15,7 @@ class FilterPresenter : BasePresenter<FilterContract.View>(), FilterContract.Pre
     private var brands: MutableList<String> = mutableListOf()
 
     override fun init() {
+        getView()?.checkDefaultSortOption()
         getView()?.showAllBrands(gamesRepository.getAllBrands())
         getView()?.showPricesRanges(gamesRepository.getPricesRange())
     }

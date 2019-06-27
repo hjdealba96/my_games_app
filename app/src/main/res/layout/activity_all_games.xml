@@ -53,11 +53,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/list_universes" />
 
                 <View
-                    android:id="@+id/line_text_new"
+                    android:id="@+id/separator_new_games"
                     android:layout_width="wrap_content"
                     android:layout_height="0.5dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:visibility="gone"
                     android:background="@android:color/black"
                     app:layout_constraintBottom_toBottomOf="@+id/text_new"
                     app:layout_constraintStart_toEndOf="@+id/text_new"
@@ -85,11 +86,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/list_new_games" />
 
                 <View
-                    android:id="@+id/line_text_popular"
+                    android:id="@+id/separator_popular_games"
                     android:layout_width="wrap_content"
                     android:layout_height="0.5dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:visibility="gone"
                     android:background="@android:color/black"
                     app:layout_constraintBottom_toBottomOf="@+id/text_popular"
                     app:layout_constraintStart_toEndOf="@+id/text_popular"
@@ -117,10 +119,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/list_popular_games" />
 
                 <View
+                    android:id="@+id/separator_all_games"
                     android:layout_width="wrap_content"
                     android:layout_height="0.5dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:visibility="gone"
                     android:background="@android:color/black"
                     app:layout_constraintBottom_toBottomOf="@+id/text_all"
                     app:layout_constraintStart_toEndOf="@+id/text_all"

@@ -7,6 +7,7 @@ import com.co.gamesapp.data.PricesRange
 
 interface FilterContract {
     interface View : BaseView {
+        fun checkDefaultSortOption()
         fun showAllBrands(brands: LiveData<List<String>>)
         fun showPricesRanges(ranges: LiveData<PricesRange>)
         fun showAllGamesFiltered(filterParameters: FilterParameters)

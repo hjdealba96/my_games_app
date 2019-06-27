@@ -12,6 +12,9 @@ abstract class GamesRoomDatabase : RoomDatabase() {
     abstract fun gamesDao(): GamesDao
 
     companion object {
+
+        private const val DATABASE_NAME = "games_database"
+
         @Volatile
         private var INSTANCE: GamesRoomDatabase? = null
 
@@ -25,7 +28,7 @@ abstract class GamesRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     GamesRoomDatabase::class.java,
-                    "games_database"
+                    DATABASE_NAME
                 ).build()
                 INSTANCE = instance
                 return instance

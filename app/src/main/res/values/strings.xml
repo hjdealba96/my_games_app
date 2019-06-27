@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Sm4sh</string>
     <string name="key_user_preferences" translatable="false">user_preferences</string>
+    <string name="text_price_quantity" translatable="false">$%1$s</string>
     <string name="text_catalog">Access our extended Catalog</string>
     <string name="text_worth_gaming">Know the little is worth gaming</string>
     <string name="text_real_time_updates">Real-time updates</string>
@@ -23,4 +24,8 @@
     <string name="text_ratings">Ratings</string>
     <string name="text_brands">Brands</string>
     <string name="text_apply">Apply</string>
+    <string name="text_game_details_summary">Game details summary</string>
+    <string name="text_sku">SKU: %1$s</string>
+    <string name="text_downloads_number">%1$s downloads</string>
+    <string name="text_all_option">All</string>
 </resources>

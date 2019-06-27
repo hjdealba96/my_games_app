@@ -4,13 +4,22 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:actionMenuTextAppearance">@style/AppMenuTextAppearance</item>
+    </style>
+    
+    <style name="AppSecondaryScreenTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/colorSecondary</item>
+    </style>
+
+    <style name="AppScreenTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/colorTertiary</item>
     </style>
 
     <style name="AppMenuTextAppearance" parent="TextAppearance.AppCompat.Menu">
         <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppSplashTheme" parent="AppTheme">
@@ -26,10 +35,18 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="AppOutlinedButton" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textColor">@color/colorAccent</item>
+    <style name="AppFilledUnelevatedLightButton" parent="@style/Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">#DB3069</item>
         <item name="cornerRadius">8dp</item>
-        <item name="strokeColor">@color/colorAccent</item>
+        <item name="backgroundTint">@android:color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppOutlinedButton" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="strokeColor">@color/colorPrimary</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">16sp</item>
     </style>
@@ -47,22 +64,30 @@
     <style name="AppTextTitle">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppRangeSeekBar">
-        <item name="left_thumb_color">@color/colorAccent</item>
-        <item name="left_thumb_color_pressed">@color/colorAccent</item>
-        <item name="right_thumb_color">@color/colorAccent</item>
-        <item name="right_thumb_color_pressed">@color/colorAccent</item>
+        <item name="left_thumb_color">@color/colorPrimary</item>
+        <item name="left_thumb_color_pressed">@color/colorPrimary</item>
+        <item name="right_thumb_color">@color/colorPrimary</item>
+        <item name="right_thumb_color_pressed">@color/colorPrimary</item>
     </style>
 
-    <style name="AppRatingBar" parent="android:Widget.Material.RatingBar.Indicator">
+    <style name="AppRatingBarGold" parent="android:Widget.Material.RatingBar.Indicator">
         <item name="android:scaleX">.8</item>
         <item name="android:scaleY">.8</item>
         <item name="android:progressBackgroundTint">@android:color/transparent</item>
         <item name="android:progressTint">#ffffcd00</item>
         <item name="android:secondaryProgressTint">#ffffcd00</item>
+    </style>
+
+    <style name="AppRatingBarLight" parent="android:Widget.Material.RatingBar.Indicator">
+        <item name="android:scaleX">.8</item>
+        <item name="android:scaleY">.8</item>
+        <item name="android:progressBackgroundTint">@color/colorBlackTranslucent</item>
+        <item name="android:progressTint">@color/colorWhiteTranslucentTitle</item>
+        <item name="android:secondaryProgressTint">@color/colorWhiteTranslucentTitle</item>
     </style>
 
 </resources>

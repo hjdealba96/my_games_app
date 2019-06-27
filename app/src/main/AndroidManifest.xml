@@ -26,13 +26,18 @@
 
         <activity
             android:name=".onboarding.OnBoardingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppScreenTheme" />
         <activity
             android:name=".allgames.AllGamesActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".gamesfilter.FilterActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".gamedetails.GameDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppSecondaryScreenTheme" />
 
     </application>
 

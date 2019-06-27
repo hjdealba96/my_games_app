@@ -26,9 +26,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:descendantFocusability="blocksDescendants"
-            android:focusable="false"
-            android:focusableInTouchMode="false">
+            android:descendantFocusability="blocksDescendants">
 
             <TextView
                 android:id="@+id/text_sort_by"
@@ -62,6 +60,7 @@
                     android:id="@+id/radio_date_added"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:layoutDirection="rtl"
                     android:text="@string/text_date_added" />
 
@@ -69,6 +68,7 @@
                     android:id="@+id/radio_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:layoutDirection="rtl"
                     android:text="@string/text_price" />
 
@@ -93,6 +93,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                app:bar_highlight_color="@color/colorBaseThemeFlat"
                 app:data_type="_double"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -128,10 +129,9 @@
 
             <RatingBar
                 android:id="@+id/rating_five"
-                style="@style/AppRatingBar"
+                style="@style/AppRatingBarGold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:rating="5"
                 app:layout_constraintBottom_toBottomOf="@+id/check_five_rating"
@@ -149,10 +149,9 @@
 
             <RatingBar
                 android:id="@+id/rating_four"
-                style="@style/AppRatingBar"
+                style="@style/AppRatingBarGold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:rating="4"
                 app:layout_constraintBottom_toTopOf="@+id/rating_three"
@@ -170,10 +169,9 @@
 
             <RatingBar
                 android:id="@+id/rating_three"
-                style="@style/AppRatingBar"
+                style="@style/AppRatingBarGold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:rating="3"
                 app:layout_constraintBottom_toTopOf="@+id/rating_two"
@@ -191,10 +189,9 @@
 
             <RatingBar
                 android:id="@+id/rating_two"
-                style="@style/AppRatingBar"
+                style="@style/AppRatingBarGold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:rating="2"
                 app:layout_constraintBottom_toTopOf="@+id/rating_one"
@@ -212,10 +209,9 @@
 
             <RatingBar
                 android:id="@+id/rating_one"
-                style="@style/AppRatingBar"
+                style="@style/AppRatingBarGold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:rating="1"
                 app:layout_constraintBottom_toTopOf="@+id/text_brands"
@@ -266,6 +262,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:text="@string/text_apply"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

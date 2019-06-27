@@ -29,10 +29,14 @@ class FilterActivity : AppCompatActivity(), FilterContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
         setSupportActionBar(toolbar)
-        showBackArrowButton(R.color.colorAccent)
+        showBackArrowButton(R.color.colorPrimary)
         setSortOptionsListener()
         setRatingsListener()
         setApplyListener()
+        loadPresenter()
+    }
+
+    private fun loadPresenter() {
         presenter = FilterPresenter()
         presenter?.setView(this)
     }
@@ -40,6 +44,10 @@ class FilterActivity : AppCompatActivity(), FilterContract.View {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    override fun checkDefaultSortOption() {
+        radio_date_added.isChecked = true
     }
 
     override fun showAllBrands(brands: LiveData<List<String>>) {

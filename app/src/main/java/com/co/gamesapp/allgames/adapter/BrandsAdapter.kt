@@ -1,5 +1,7 @@
 package com.co.gamesapp.allgames.adapter
 
+import android.content.Context
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +17,10 @@ class BrandsAdapter(
 ) : RecyclerView.Adapter<BrandsAdapter.ViewHolder>() {
 
     private val options = brands.toMutableList()
+    private var lastCheckedButton: Button? = null
 
     init {
-        options.add(0, "All")
+        options.add(0, "")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,15 +33,42 @@ class BrandsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val game = options[position]
-        holder.buttonUniverse.text = game
-        holder.bind(game, onFilterOptionClicked, onClearFilterOptionClicked)
+        if (position == 0) {
+            holder.buttonUniverse.text = holder.itemView.context.getString(R.string.text_all_option)
+        } else {
+            holder.buttonUniverse.text = game
+        }
+        holder.bind(game, onFilterOptionClicked, onClearFilterOptionClicked, {
+            if (lastCheckedButton != null) uncheckButton(lastCheckedButton!!, holder.itemView.context)
+            checkButton(it, it.context)
+            lastCheckedButton = it
+        })
 
+    }
+
+    private fun checkButton(button: Button, context: Context) {
+        applyColorFilter(android.R.color.white, R.color.colorPrimary, button, context)
+    }
+
+    private fun uncheckButton(button: Button, context: Context) {
+        applyColorFilter(R.color.colorPrimary, android.R.color.white, button, context)
+    }
+
+    private fun applyColorFilter(textColor: Int, backgroundColor: Int, button: Button, context: Context) {
+        button.setTextColor(context.getColor(textColor))
+        button.background.setColorFilter(context.getColor(backgroundColor), PorterDuff.Mode.SRC)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val buttonUniverse: Button = itemView.button_brand
-        fun bind(universe: String, onFilterOptionClicked: (String) -> Unit, onClearFilterOptionClicked: () -> Unit) {
+        fun bind(
+            universe: String,
+            onFilterOptionClicked: (String) -> Unit,
+            onClearFilterOptionClicked: () -> Unit,
+            onButtonClicked: (Button) -> Unit
+        ) {
             buttonUniverse.setOnClickListener {
+                onButtonClicked(buttonUniverse)
                 if (adapterPosition == 0) {
                     onClearFilterOptionClicked()
                 } else {
@@ -46,5 +76,6 @@ class BrandsAdapter(
                 }
             }
         }
+
     }
 }

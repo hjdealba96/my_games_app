@@ -20,6 +20,18 @@ class GamesLocalDataSource : GamesLocalDataSource {
 
     private val gamesDao = GamesApplication.roomDatabase.gamesDao()
 
+    override fun saveGames(games: List<Game>) {
+        if (games.isNotEmpty()) {
+            GlobalScope.launch {
+                withContext(Dispatchers.IO) {
+                    gamesDao.saveGames(games)
+                }
+            }
+        }
+    }
+
+    override fun getGame(id: String): LiveData<Game> = gamesDao.getGame(id)
+
     override fun getAllGames(): LiveData<List<Game>> = gamesDao.getAllGames()
 
     override fun getPopularGames(): LiveData<List<Game>> = gamesDao.getPopularGames()
@@ -49,15 +61,4 @@ class GamesLocalDataSource : GamesLocalDataSource {
                     FilterParameters.SortOption.DATE_ADDED -> " ORDER BY datetime(created_at) DESC;"
                     FilterParameters.SortOption.DOWNLOADS -> " ORDER BY cast(downloads as integer) DESC;"
                 }}"
-
-    override fun saveGames(games: List<Game>) {
-        if (games.isNotEmpty()) {
-            GlobalScope.launch {
-                withContext(Dispatchers.IO) {
-                    gamesDao.saveGames(games)
-                }
-            }
-        }
-    }
-
 }

@@ -8,10 +8,12 @@ import com.co.gamesapp.data.PricesRange
 import com.co.gamesapp.data.source.remote.GamesRemoteDataSource
 import com.co.gamesapp.data.source.local.games.GamesLocalDataSource
 
-class DefaultGamesRepository : GamesRepository {
+class DefaultGamesRepository(
+    private val remoteDataSource: GamesDataSource = GamesRemoteDataSource(),
+    private val localDataSource: com.co.gamesapp.data.source.GamesLocalDataSource = GamesLocalDataSource()
+) : GamesRepository {
 
-    private val remoteDataSource = GamesRemoteDataSource()
-    private val localDataSource = GamesLocalDataSource()
+    override fun getGame(id: String): LiveData<Game> = localDataSource.getGame(id)
 
     override fun getAllGames(): LiveData<List<Game>> {
         val mediator = MediatorLiveData<List<Game>>()

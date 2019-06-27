@@ -6,6 +6,7 @@ import com.co.gamesapp.data.Game
 import com.co.gamesapp.data.PricesRange
 
 interface GamesRepository {
+    fun getGame(id: String): LiveData<Game>
     fun getAllGames(): LiveData<List<Game>>
     fun getPopularGames(): LiveData<List<Game>>
     fun getNewGames(): LiveData<List<Game>>

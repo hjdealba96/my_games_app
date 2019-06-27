@@ -8,8 +8,21 @@ import com.co.gamesapp.data.PricesRange
 
 @Dao
 interface GamesDao {
+
+    @Transaction
+    suspend fun saveGames(games: List<Game>) {
+        deleteNotExistentGames(games.map { it.objectId }.toList())
+        insertGames(games)
+    }
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveGames(games: List<Game>)
+    suspend fun insertGames(games: List<Game>)
+
+    @Query("DELETE FROM game WHERE id NOT IN (:newGames);")
+    suspend fun deleteNotExistentGames(newGames: List<String>)
+
+    @Query("SELECT * FROM game WHERE id = :id ")
+    fun getGame(id: String): LiveData<Game>
 
     @Query("SELECT * FROM game WHERE name IS NOT null ORDER BY name;")
     fun getAllGames(): LiveData<List<Game>>
