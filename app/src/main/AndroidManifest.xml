@@ -16,6 +16,7 @@
 
         <activity
             android:name=".splash.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppSplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +24,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".onboarding.OnBoardingActivity" />
-        <activity android:name=".allgames.AllGamesActivity" />
-        <activity android:name=".gamesfilter.FilterActivity" />
+        <activity
+            android:name=".onboarding.OnBoardingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".allgames.AllGamesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gamesfilter.FilterActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

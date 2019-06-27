@@ -15,6 +15,7 @@ interface AllGamesContract {
     }
 
     interface Presenter {
+        fun loadGamesList()
         fun filterGames(filterParameters: FilterParameters)
     }
 

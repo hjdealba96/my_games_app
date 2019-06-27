@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -22,6 +23,7 @@ import com.co.gamesapp.data.Game
 import com.co.gamesapp.extension.unsuscribeObserver
 import com.co.gamesapp.gamesfilter.FilterActivity
 import kotlinx.android.synthetic.main.activity_all_games.*
+import kotlinx.android.synthetic.main.activity_all_games.toolbar
 
 class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
 
@@ -55,6 +57,15 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
             R.id.filter -> {
                 startActivityForResult(FILTER_REQUEST_CODE, FilterActivity::class.java)
             }
+            R.id.clear_filter -> {
+                text_all.text = null
+                toolbar.menu.findItem(R.id.filter).isVisible = true
+                item.isVisible = false
+                setScrollPositionToStart()
+                setSwipeRefreshEnabled(true)
+                showSections()
+                presenter?.loadGamesList()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -72,15 +83,58 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
         }
     }
 
+    private fun setScrollPositionToStart() {
+        scroll_content.smoothScrollTo(0, 0)
+    }
+
     private fun hideSwipeRefreshing() {
         swipe_refresh?.isRefreshing = false
     }
+
+    private fun setSwipeRefreshEnabled(state: Boolean) {
+        swipe_refresh.isEnabled = state
+    }
+
+    private fun changeBrandsSectionVisibility(visibility: Int) {
+        list_universes.visibility = visibility
+    }
+
+    private fun changeNewGamesSectionVisibilty(visibility: Int) {
+        text_new.visibility = visibility
+        list_new_games.visibility = visibility
+        line_text_new.visibility = visibility
+    }
+
+    private fun changePopularGamesSectionVisibilty(visibility: Int) {
+        text_popular.visibility = visibility
+        list_popular_games.visibility = visibility
+        line_text_popular.visibility = visibility
+    }
+
+    private fun showSections() {
+        changeBrandsSectionVisibility(View.VISIBLE)
+        changePopularGamesSectionVisibilty(View.VISIBLE)
+        changeNewGamesSectionVisibilty(View.VISIBLE)
+    }
+
+    private fun hiddenSections() {
+        changeBrandsSectionVisibility(View.GONE)
+        changeNewGamesSectionVisibilty(View.GONE)
+        changePopularGamesSectionVisibilty(View.GONE)
+    }
+
+    private fun createGamesAdapter(
+        type: GamesAdapter.LayoutType, presenter: GamesListPresenter, onDataSetChanged: (Int) -> Unit
+    ) = GamesAdapterBuilder()
+        .setLayoutType(type)
+        .setPresenter(presenter)
+        .setRequestManager(Glide.with(this))
+        .setOnDataSetChanged(onDataSetChanged).create()
 
     override fun showAllBrands(brands: LiveData<List<String>>) {
         unsuscribeObserver(brands)
         brands.observe(this, Observer {
             hideSwipeRefreshing()
-
             val brandsAdapter = BrandsAdapterBuilder()
                 .setBrands(it)
                 .setOnFilterOptionClicked { universe ->
@@ -124,6 +178,12 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
         })
     }
 
+    fun showGamesList(games: LiveData<List<Game>>) {
+        games.observe(this, Observer {
+
+        })
+    }
+
     override fun showPopularGames(games: LiveData<List<Game>>) {
         unsuscribeObserver(games)
         games.observe(this, Observer {
@@ -131,8 +191,7 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
             text_popular.text = getString(R.string.text_popular, it.size)
             popularGamesListPresenter = GamesListPresenter(it)
             val popularGamesAdapter = createGamesAdapter(
-                GamesAdapter.LayoutType.POPULAR,
-                popularGamesListPresenter!!
+                GamesAdapter.LayoutType.POPULAR, popularGamesListPresenter!!
             ) { count ->
                 text_popular.text = getString(R.string.text_popular, count)
             }
@@ -164,15 +223,29 @@ class AllGamesActivity : AppCompatActivity(), AllGamesContract.View {
         })
     }
 
-    fun createGamesAdapter(
-        type: GamesAdapter.LayoutType, presenter: GamesListPresenter, onDataSetChanged: (Int) -> Unit
-    ) = GamesAdapterBuilder()
-        .setLayoutType(type)
-        .setPresenter(presenter)
-        .setRequestManager(Glide.with(this))
-        .setOnDataSetChanged(onDataSetChanged).create()
-
     override fun showFilteredGames(games: LiveData<List<Game>>) {
+        setScrollPositionToStart()
+        toolbar.menu.findItem(R.id.filter).isVisible = false
+        toolbar.menu.findItem(R.id.clear_filter).isVisible = true
+        setSwipeRefreshEnabled(false)
+        hiddenSections()
+        unsuscribeObserver(games)
+        games.observe(this, Observer {
+            hideSwipeRefreshing()
+            text_all.text = getString(R.string.text_filtered, it.size)
+            allGamesListPresenter = GamesListPresenter(it)
+            val allGamesAdapter = createGamesAdapter(
+                GamesAdapter.LayoutType.ALL,
+                allGamesListPresenter!!
+            ) { count ->
+                text_all.text = getString(R.string.text_filtered, count)
+            }
+            list_all_games.apply {
+                setHasFixedSize(true)
+                adapter = allGamesAdapter
+                layoutManager = GridLayoutManager(context, 2)
+            }
+        })
     }
 
 }

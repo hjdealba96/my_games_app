@@ -11,6 +11,10 @@ class AllGamesPresenter : BasePresenter<AllGamesContract.View>(),
     private val gamesRepository = DefaultGamesRepository()
 
     override fun init() {
+        loadGamesList()
+    }
+
+    override fun loadGamesList() {
         getView()?.showAllGames(gamesRepository.getAllGames())
         getView()?.showNewGames(gamesRepository.getNewGames())
         getView()?.showPopularGames(gamesRepository.getPopularGames())

@@ -23,12 +23,14 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_content"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:descendantFocusability="blocksDescendants">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/list_universes"
@@ -51,6 +53,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/list_universes" />
 
                 <View
+                    android:id="@+id/line_text_new"
                     android:layout_width="wrap_content"
                     android:layout_height="0.5dp"
                     android:layout_marginStart="8dp"
@@ -82,6 +85,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/list_new_games" />
 
                 <View
+                    android:id="@+id/line_text_popular"
                     android:layout_width="wrap_content"
                     android:layout_height="0.5dp"
                     android:layout_marginStart="8dp"
