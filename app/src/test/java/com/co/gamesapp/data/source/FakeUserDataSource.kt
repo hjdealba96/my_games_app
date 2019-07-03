@@ -1,8 +1,6 @@
 package com.co.gamesapp.data.source
 
-class FakeUserDataSource : UserDataSource {
-
-    private var startStatus = false
+class FakeUserDataSource(private var startStatus: Boolean = false) : UserDataSource {
 
     override fun saveStart(status: Boolean) {
         this.startStatus = status

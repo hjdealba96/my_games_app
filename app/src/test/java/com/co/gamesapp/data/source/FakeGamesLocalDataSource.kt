@@ -48,5 +48,9 @@ class FakeGamesLocalDataSource : GamesLocalDataSource {
     override fun getAllGames(): LiveData<List<Game>> = liveData {
         emit(games)
     }
+    
+    override fun getGame(id: String): LiveData<Game> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 }

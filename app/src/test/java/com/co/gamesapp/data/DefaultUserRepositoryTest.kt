@@ -11,21 +11,28 @@ class DefaultUserRepositoryTest {
     private lateinit var userRepository: DefaultUserRepository
 
     @Before
-    fun createRepository(){
+    fun createRepository() {
         userRepository = DefaultUserRepository(FakeUserDataSource())
     }
 
     @Test
-    fun test_initialStartStatus(){
+    fun test_initialStartStatus() {
         val savedStatus = userRepository.getStartStatus()
         assertEquals(false, savedStatus)
     }
 
     @Test
     fun test_saveStartStatusTrue() {
-        userRepository.saveStart(true)
+        userRepository.saveStart(started = true)
         val savedStatus = userRepository.getStartStatus()
         assertEquals(true, savedStatus)
+    }
+
+    @Test
+    fun test_saveStartStatusFalse() {
+        userRepository.saveStart(started = false)
+        val savedStatus = userRepository.getStartStatus()
+        assertEquals(false, savedStatus)
     }
 
 }
