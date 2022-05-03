@@ -1,4 +1,4 @@
-# Smash Brosh App)
+# Smash Brosh App
 
 Project built to present a technical chanllege test at [Koombea Inc](https://www.koombea.com/)
 
